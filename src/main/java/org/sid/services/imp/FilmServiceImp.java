@@ -20,7 +20,17 @@ public class FilmServiceImp implements FilmService {
 	@Override
 	public Optional<FilmModel> findById(String id){
 		return this.seance.findById(id);
-	}	
+	}
+	@Override
+	public Optional<FilmModel> findByGenre(String genre) {
+		// TODO Auto-generated method stub
+		return this.seance.findAllByGenre(genre);
+	}
+	@Override
+	public FilmModel findByTitre(String titre) {
+		// TODO Auto-generated method stub
+		return this.seance.findAllByTitre(titre);
+	}
 	@Override
 	public FilmModel save(FilmModel s) {
 		return this.seance.save(s);

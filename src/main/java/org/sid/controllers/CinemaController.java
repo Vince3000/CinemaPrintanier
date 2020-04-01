@@ -39,6 +39,7 @@ public class CinemaController {
 	private Optional<CinemaModel> findById(@PathVariable String id){
 		return this.service.findById(id);
 	}
+
 	@PostMapping("")
 	public CinemaModel save(@RequestBody CinemaModel entity) {
 		return this.service.save(entity);

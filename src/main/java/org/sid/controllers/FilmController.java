@@ -6,13 +6,19 @@ import java.util.Optional;
 import org.sid.models.FilmModel;
 import org.sid.services.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@CrossOrigin
+@RequestMapping("films")
 public class FilmController {
 	@Autowired
 	private FilmService service;
@@ -23,6 +29,14 @@ public class FilmController {
 	@GetMapping("{id}")
 	private Optional<FilmModel> findById(@PathVariable String id){
 		return this.service.findById(id);
+	}
+	@GetMapping("genre/{genre}")
+	private Optional<FilmModel> findByGenre(@PathVariable String genre){
+		return this.service.findByGenre(genre);
+	}
+	@GetMapping("titre/{titre}")
+	private FilmModel findByTitre(@PathVariable String titre){
+		return this.service.findByTitre(titre);
 	}
 	@PostMapping("")
 	public FilmModel save(@RequestBody FilmModel entity) {
