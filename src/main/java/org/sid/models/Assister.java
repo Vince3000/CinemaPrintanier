@@ -1,6 +1,5 @@
 package org.sid.models;
 
-import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,6 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author vince
+ *salle se référe à Seance
+ *client se référe à client
+ *public assister permet l'ajout de client
+ */
 @Data
 @Document
 @NoArgsConstructor
@@ -16,9 +21,16 @@ import lombok.NoArgsConstructor;
 
 public class Assister {
 	@Id
-	String id;
-	float prix;
+	private String id;
+	private float prix;
 	@DBRef
 	private Seance salle;
-	private List<Client> client;
+	@DBRef
+	private Client client;
+
+	public Assister(float prix, Client client) {
+		super();
+		this.prix=prix;
+		this.client=client;
+	}
 }

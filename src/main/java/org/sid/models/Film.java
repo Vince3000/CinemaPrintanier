@@ -15,12 +15,12 @@ import lombok.NoArgsConstructor;
 
 public class Film {
 	@Id
-	String id;
-	String titre;
-	int duree_minute;
-	int age_limite;
-	String genre;
-	String visa;
+	private String id;
+	private String titre;
+	private int duree_minute;
+	private int age_limite;
+	private String genre;
+	private String visa;
 	@DBRef
 	private Seance seance;
 }

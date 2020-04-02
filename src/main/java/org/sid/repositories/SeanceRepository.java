@@ -1,5 +1,6 @@
 package org.sid.repositories;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.sid.models.Film;
@@ -9,6 +10,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface SeanceRepository extends MongoRepository<Seance, String> {
 	public List<Seance> findAll();
 	public List<Seance> findAllByType(String type);
+	public List<Seance> findAllByFilmGenre(Film genre);
 	public List<Seance> findByFilm(Film film);
-	public List<Seance> findByDateBetween(int debut, int fin);
+	public List<Seance> findAllByDateBetween(LocalDateTime debut, LocalDateTime fin);
 }

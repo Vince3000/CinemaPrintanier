@@ -11,5 +11,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface FilmRepository extends MongoRepository<Film, String> {
 	public List<Film> findAll();
 	public List<Film> findAllByGenre(String genre);
-	public Film findAllByTitre(String titre);
+	public Film findByTitre(String titre);
 }

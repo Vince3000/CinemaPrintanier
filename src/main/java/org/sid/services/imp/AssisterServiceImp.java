@@ -29,15 +29,15 @@ public class AssisterServiceImp implements AssisterService{
 
 //	@Override
 //	public Assister addClient(String idseance, String idclient) {
-//		
+//
 //		Assister assist = null;
-//		
-//		Seance seance = this.findById(idseance).get();//findById(idseance).get();
-//		
+//
+//		Seance seance = this.findById(idseance);//findById(idseance).get();
+//
 //		Client c = this.ClientService.findById(idclient).get();
 //		assist = new Assister(this.prix(seance, c),c);
 //		this.assister.save(assist);
-//		
+//
 //		return assist;
 //	}
 	//Pas de @Override ce n'est pas utilisé dasn le controller

@@ -12,6 +12,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author vince
+ *salle se référe à Salle
+ */
 @Data
 @Document
 @AllArgsConstructor
@@ -19,13 +23,15 @@ import lombok.NoArgsConstructor;
 
 public class Seance {
 	@Id
-	String id;
-	LocalDateTime date;
-	String type;
-	int duree;
+	private String id;
+	private LocalDateTime date;
+	private String type;
+	private int duree;
+	@DBRef
 	private Salle salle;
-	private  List<Assister> Client = new ArrayList<>();
 	@DBRef
 	private Film film;
+	private  List<Assister> Client = new ArrayList<>();
+
 
 }

@@ -9,6 +9,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author vince
+ *Client se référe à Assister
+ */
 @Data
 @Document
 @NoArgsConstructor
@@ -16,10 +20,10 @@ import lombok.NoArgsConstructor;
 
 public class Client {
 	@Id
-	String id;
-	String nom;
-	boolean etudiant;
-	LocalDate naissance;
+	private String id;
+	private String nom;
+	private boolean etudiant;
+	private LocalDate naissance;
 	@DBRef
 	private Assister client;
 }

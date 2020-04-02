@@ -12,4 +12,5 @@ public interface FilmService {
 	public Film save(Film s);
 	public void delete(String id);
 	public List<Film> getByRecette(int recette);
+	public List<Film> findFilmByGenre(String genre);
 }

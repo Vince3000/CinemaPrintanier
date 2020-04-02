@@ -24,7 +24,11 @@ public class FilmServiceImp implements FilmService {
 	@Override
 	public Film findByTitre(String titre) {
 		// TODO Auto-generated method stub
-		return this.film.findAllByTitre(titre);
+		return this.film.findByTitre(titre);
+	}
+	@Override
+	public List<Film> findFilmByGenre(String genre){
+		return this.film.findAllByGenre(genre);
 	}
 	@Override
 	public Film save(Film s) {

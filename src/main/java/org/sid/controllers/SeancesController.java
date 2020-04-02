@@ -1,5 +1,6 @@
 package org.sid.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.experimental.PackagePrivate;
 /**
  * @author vince
  *Rassemble les Controllers de Seances
@@ -39,13 +39,13 @@ public class SeancesController {
 	private List<Seance> findByType(@PathVariable String type){
 		return this.service.findByType(type);
 	}
-//	@PutMapping("seance/{seanceid}/assister/{assisterid}/client/clientid")
-//	public Seance addClient(String idseance,String idAssister, String idclient) {
-//		return this.service.addClient(idseance, idAssister,idclient);
-//	}
 	@GetMapping("recherche/seance/{film}")
 	private List<Seance> findByFilm(@PathVariable String film){
 		return this.service.findByFilm(film);
+	}
+	@GetMapping("debut/{debut}/fin/{fin}")
+	private List<Seance> findByHoraire(LocalDateTime debut, LocalDateTime fin){
+		return this.service.findByHoraire(debut, fin);
 	}
 //	@GetMapping("genre/{genre}")
 //	private List<Seance> findByGenre(@PathVariable String genre){
@@ -54,6 +54,10 @@ public class SeancesController {
 	@PostMapping("")
 	public Seance save(@RequestBody Seance entity) {
 		return this.service.save(entity);
+	}
+	@PostMapping("ajoutclient")
+	public Seance addClient(String idseance,String idAssister) {
+		return this.service.addClient(idseance, idAssister);
 	}
 	@PutMapping("")
 	public Seance update(@RequestBody Seance entity) {

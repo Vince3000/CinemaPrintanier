@@ -8,4 +8,5 @@ public interface AssisterService {
 	Optional<Assister> findById(String id);
 	//Assister addClient(String idAssister, String idclient);
 	public Assister update(Assister a);
+	//Assister addClient(String idseance, String idclient);
 }

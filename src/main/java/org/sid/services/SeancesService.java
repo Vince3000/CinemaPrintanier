@@ -10,11 +10,11 @@ public interface SeancesService {
 	public List<Seance> findAll();
 	public Optional<Seance> findById(String id);
 	public List<Seance> findByType(String type);
-	public List<Seance> findByHoraire(LocalDateTime debut, LocalDateTime fin);
-//	public List<Seance> findByGenre(String genre);
 	public List<Seance> findByFilm(String nomfilm);
-	//public Seance addClient(String idseance,String idAssister);
-	//public List<SeanceModel> findByHoraire(String debut, String fin);
+	public List<Seance> findByHoraire(LocalDateTime debut, LocalDateTime fin);
+	public Seance addClient(String idseance,String idAssister);
+	//public List<Seance> findByGenre(String genre);
 	public Seance save(Seance s);
 	public void delete(String id);
+	public Seance update(Seance s);
 }
