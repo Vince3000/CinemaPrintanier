@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 //import org.sid.dto.CinemaDto;
-import org.sid.models.CinemaModel;
+import org.sid.models.Cinema;
 import org.sid.services.CinemaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,36 +19,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author vince
- *Controller de cinéma
+ *Rassemble les Controllers de cinéma
  */
 
 @RestController
 @CrossOrigin
 @RequestMapping("cinemas")
 public class CinemaController {
-
 	@Autowired
 	private CinemaService service;
-
 	@GetMapping("")
-	private List<CinemaModel> findAll() {
+	private List<Cinema> findAll() {
 		return this.service.findAll();
 	}
-
-	@GetMapping("{id}")
-	private Optional<CinemaModel> findById(@PathVariable String id){
+	@GetMapping("recherche/{id}")
+	private Optional<Cinema> findById(@PathVariable String id){
 		return this.service.findById(id);
 	}
-
 	@PostMapping("")
-	public CinemaModel save(@RequestBody CinemaModel entity) {
+	public Cinema save(@RequestBody Cinema entity) {
 		return this.service.save(entity);
 	}
 	@PutMapping("")
-	public CinemaModel update(@RequestBody CinemaModel entity) {
+	public Cinema update(@RequestBody Cinema entity) {
 		return this.service.save(entity);
 	}
-	@DeleteMapping("{id}")
+	@DeleteMapping("delete/{id}")
 	public void delete(@PathVariable String id) {
 		this.service.delete(id);
 	}

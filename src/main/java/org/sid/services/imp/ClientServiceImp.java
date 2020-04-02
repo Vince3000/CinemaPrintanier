@@ -3,7 +3,7 @@ package org.sid.services.imp;
 import java.util.List;
 import java.util.Optional;
 
-import org.sid.models.ClientModel;
+import org.sid.models.Client;
 import org.sid.repositories.ClientRepository;
 import org.sid.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +14,16 @@ public class ClientServiceImp implements ClientService {
 	@Autowired
 	private ClientRepository client;
 	@Override
-	public List<ClientModel> findAll() {
+	public List<Client> findAll() {
 		return this.client.findAll();
 	}
 	@Override
-	public Optional<ClientModel> findById(String id) {
+	public Optional<Client> findById(String id) {
 		// TODO Auto-generated method stub
 		return this.client.findById(id);
 	}
 	@Override
-	public ClientModel save(ClientModel s) {
+	public Client save(Client s) {
 		return this.client.save(s);
 	}
 	@Override

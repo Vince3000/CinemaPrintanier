@@ -3,14 +3,13 @@ package org.sid.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.sid.models.FilmModel;
+import org.sid.models.Film;
 
 public interface FilmService {
-	public List<FilmModel> findAll();
-	public Optional<FilmModel> findById(String id);
-	public Optional<FilmModel> findByGenre(String genre);
-	public FilmModel findByTitre(String titre);
-	public FilmModel save(FilmModel s);
+	public List<Film> findAll();
+	public Optional<Film> findById(String id);
+	public Film findByTitre(String titre);
+	public Film save(Film s);
 	public void delete(String id);
-	public List<FilmModel> getByRecette(int recette);
+	public List<Film> getByRecette(int recette);
 }

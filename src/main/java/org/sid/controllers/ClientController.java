@@ -3,7 +3,7 @@ package org.sid.controllers;
 import java.util.List;
 import java.util.Optional;
 
-import org.sid.models.ClientModel;
+import org.sid.models.Client;
 import org.sid.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+/**
+ * @author vince
+ *Rassemble les Controllers de client
+ */
 @RestController
 @CrossOrigin
 @RequestMapping("clients")
@@ -24,28 +27,27 @@ public class ClientController {
 	private ClientService service;
 
 	@GetMapping("")
-	private List<ClientModel> findAll() {
+	private List<Client> findAll() {
 		return this.service.findAll();
 	}
-
-	@GetMapping("{id}")
-	private Optional<ClientModel> findById(@PathVariable String id){
+	@GetMapping("recherche/{id}")
+	private Optional<Client> findById(@PathVariable String id){
 		return this.service.findById(id);
 	}
 	@PostMapping("")
-	public ClientModel save(@RequestBody ClientModel entity) {
+	public Client save(@RequestBody Client entity) {
 		return this.service.save(entity);
 	}
 	@PutMapping("")
-	public ClientModel update(@RequestBody ClientModel entity) {
+	public Client update(@RequestBody Client entity) {
 		return this.service.save(entity);
 	}
-	@DeleteMapping("{id}")
+	@DeleteMapping("delete/{id}")
 	public void delete(@PathVariable String id) {
 		this.service.delete(id);
 	}
 	@DeleteMapping("")
-	public void delete(@RequestBody ClientModel c) {
+	public void delete(@RequestBody Client c) {
 		this.service.delete(c.getId());
 	}
 }

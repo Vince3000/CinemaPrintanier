@@ -1,10 +1,6 @@
 package org.sid.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -16,10 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class AssisterModel {
+public class Film {
 	@Id
 	String id;
-	float prix;
-	@DBRef
-	private List<ClientModel> dbsalle = new ArrayList<>();
+	String titre;
+	int duree_minute;
+	int age_limite;
+	String genre;
+	String visa;
 }

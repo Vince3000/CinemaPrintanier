@@ -1,7 +1,7 @@
 package org.sid.services;
 
-import org.sid.models.SalleModel;
+import org.sid.models.Salle;
 
 public interface SalleService {
-	public SalleModel save(SalleModel s);
+	public Salle save(Salle s);
 }

@@ -2,8 +2,8 @@ package org.sid.dto;
 
 import java.util.List;
 
-import org.sid.models.CinemaModel;
-import org.sid.models.SalleModel;
+import org.sid.models.Cinema;
+import org.sid.models.Salle;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,8 +15,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class CinemaDto {
-
-	private CinemaModel cinema;
-	private List<SalleModel> salles;
-	
+	private Cinema cinema;
+	private List<Salle> salles;	
 }

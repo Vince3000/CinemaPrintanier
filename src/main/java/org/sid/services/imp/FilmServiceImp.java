@@ -3,7 +3,7 @@ package org.sid.services.imp;
 import java.util.List;
 import java.util.Optional;
 
-import org.sid.models.FilmModel;
+import org.sid.models.Film;
 import org.sid.repositories.FilmRepository;
 import org.sid.services.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,35 +12,35 @@ import org.springframework.stereotype.Service;
 @Service
 public class FilmServiceImp implements FilmService {
 	@Autowired
-	private FilmRepository seance;
+	private FilmRepository film;
 	@Override
-	public List<FilmModel> findAll(){
-		return this.seance.findAll();
+	public List<Film> findAll(){
+		return this.film.findAll();
 	}
 	@Override
-	public Optional<FilmModel> findById(String id){
-		return this.seance.findById(id);
+	public Optional<Film> findById(String id){
+		return this.film.findById(id);
 	}
+	//	@Override
+	//	public Optional<FilmModel> findByGenre(String genre) {
+	//		// TODO Auto-generated method stub
+	//		return this.film.findAllByGenre(genre);
+	//	}
 	@Override
-	public Optional<FilmModel> findByGenre(String genre) {
+	public Film findByTitre(String titre) {
 		// TODO Auto-generated method stub
-		return this.seance.findAllByGenre(genre);
+		return this.film.findAllByTitre(titre);
 	}
 	@Override
-	public FilmModel findByTitre(String titre) {
-		// TODO Auto-generated method stub
-		return this.seance.findAllByTitre(titre);
-	}
-	@Override
-	public FilmModel save(FilmModel s) {
-		return this.seance.save(s);
+	public Film save(Film s) {
+		return this.film.save(s);
 	}
 	@Override
 	public void delete(String id) {
-		this.seance.deleteById(id);
+		this.film.deleteById(id);
 	}
 	@Override
-	public List<FilmModel> getByRecette(int recette) {
+	public List<Film> getByRecette(int recette) {
 		return null;
 	}
 }

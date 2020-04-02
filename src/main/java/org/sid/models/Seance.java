@@ -1,5 +1,6 @@
 package org.sid.models;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +14,19 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Document
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 
-public class CinemaModel {
+public class Seance {
 	@Id
 	String id;
-	String nom;
-	String address;
+	LocalDateTime date;
+	String type;
+	int duree;
 	@DBRef
-	private List<SalleModel> dbsalle = new ArrayList<>();
+	private Assister Client;
+	@DBRef
+	private Film film;
+	@DBRef
+	private List<Salle> salle = new ArrayList<>();
 }

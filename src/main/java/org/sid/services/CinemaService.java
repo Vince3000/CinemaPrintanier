@@ -3,14 +3,12 @@ package org.sid.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.sid.dto.CinemaDto;
-import org.sid.models.CinemaModel;
+import org.sid.models.Cinema;
 
 public interface CinemaService {
-
-	public List<CinemaModel> findAll();
-	public Optional<CinemaModel> findById(String id);
-	public CinemaModel save(CinemaModel s);
+	public List<Cinema> findAll();
+	public Optional<Cinema> findById(String id);
+	public Cinema save(Cinema s);
 	public void delete(String id);
-	public CinemaDto save(CinemaDto dto);
+	//public CinemaDto save(CinemaDto dto);
 }

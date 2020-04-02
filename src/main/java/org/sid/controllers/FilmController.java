@@ -3,7 +3,7 @@ package org.sid.controllers;
 import java.util.List;
 import java.util.Optional;
 
-import org.sid.models.FilmModel;
+import org.sid.models.Film;
 import org.sid.services.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+/**
+ * @author vince
+ *Rassemble les Controllers de Film
+ */
 @RestController
 @CrossOrigin
 @RequestMapping("films")
@@ -23,35 +26,31 @@ public class FilmController {
 	@Autowired
 	private FilmService service;
 	@GetMapping("")
-	private List<FilmModel> findAll(){
+	private List<Film> findAll(){
 		return this.service.findAll();
 	}
-	@GetMapping("{id}")
-	private Optional<FilmModel> findById(@PathVariable String id){
+	@GetMapping("recherche/{id}")
+	private Optional<Film> findById(@PathVariable String id){
 		return this.service.findById(id);
 	}
-	@GetMapping("genre/{genre}")
-	private Optional<FilmModel> findByGenre(@PathVariable String genre){
-		return this.service.findByGenre(genre);
-	}
 	@GetMapping("titre/{titre}")
-	private FilmModel findByTitre(@PathVariable String titre){
+	private Film findByTitre(@PathVariable String titre){
 		return this.service.findByTitre(titre);
 	}
 	@PostMapping("")
-	public FilmModel save(@RequestBody FilmModel entity) {
+	public Film save(@RequestBody Film entity) {
 		return this.service.save(entity);
 	}
 	@PutMapping("")
-	public FilmModel update(@RequestBody FilmModel entity) {
+	public Film update(@RequestBody Film entity) {
 		return this.service.save(entity);
 	}
-	@DeleteMapping("{id}")
+	@DeleteMapping("delete/{id}")
 	public void delete(@PathVariable String id) {
 		this.service.delete(id);
 	}
 	@DeleteMapping("")
-	public void delete(@RequestBody FilmModel s) {
+	public void delete(@RequestBody Film s) {
 		this.service.delete(s.getId());
 	}
 }
