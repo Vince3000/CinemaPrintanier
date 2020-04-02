@@ -21,11 +21,6 @@ public class FilmServiceImp implements FilmService {
 	public Optional<Film> findById(String id){
 		return this.film.findById(id);
 	}
-	//	@Override
-	//	public Optional<FilmModel> findByGenre(String genre) {
-	//		// TODO Auto-generated method stub
-	//		return this.film.findAllByGenre(genre);
-	//	}
 	@Override
 	public Film findByTitre(String titre) {
 		// TODO Auto-generated method stub

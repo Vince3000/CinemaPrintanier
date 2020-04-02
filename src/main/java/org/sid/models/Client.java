@@ -18,7 +18,7 @@ public class Client {
 	@Id
 	String id;
 	String nom;
-	Boolean etudiant;
+	boolean etudiant;
 	LocalDate naissance;
 	@DBRef
 	private Assister client;

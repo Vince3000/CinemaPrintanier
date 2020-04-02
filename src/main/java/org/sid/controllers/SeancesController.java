@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import lombok.experimental.PackagePrivate;
 /**
  * @author vince
  *Rassemble les Controllers de Seances
@@ -41,10 +43,14 @@ public class SeancesController {
 //	public Seance addClient(String idseance,String idAssister, String idclient) {
 //		return this.service.addClient(idseance, idAssister,idclient);
 //	}
-	@GetMapping("genre/{genre}")
-	private List<Seance> findByGenre(@PathVariable String genre){
-		return this.service.findByGenre(genre);
+	@GetMapping("recherche/seance/{film}")
+	private List<Seance> findByFilm(@PathVariable String film){
+		return this.service.findByFilm(film);
 	}
+//	@GetMapping("genre/{genre}")
+//	private List<Seance> findByGenre(@PathVariable String genre){
+//		return this.service.findByGenre(genre);
+//	}
 	@PostMapping("")
 	public Seance save(@RequestBody Seance entity) {
 		return this.service.save(entity);

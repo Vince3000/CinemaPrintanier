@@ -23,10 +23,9 @@ public class Seance {
 	LocalDateTime date;
 	String type;
 	int duree;
-	@DBRef
-	private Assister Client;
+	private Salle salle;
+	private  List<Assister> Client = new ArrayList<>();
 	@DBRef
 	private Film film;
-	@DBRef
-	private List<Salle> salle = new ArrayList<>();
+
 }

@@ -1,5 +1,8 @@
 package org.sid.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,6 +22,8 @@ public class Salle {
 	String nom;
 	int place;
 	@DBRef
-	private Seance seance;
-	
+	private Cinema cinema;
+	@DBRef
+	private List<Seance> seances = new ArrayList<>();
+
 }

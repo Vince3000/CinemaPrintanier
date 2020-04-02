@@ -58,7 +58,7 @@ public class AssisterServiceImp implements AssisterService{
 		if(pc.getNaissance().compareTo(LocalDate.now())<10) {
 			result-=4.0f;
 		}
-		if(pc.getEtudiant()) {
+		if(pc.isEtudiant()) {
 			result-=2.0f;
 		}
 		return result;

@@ -20,6 +20,5 @@ public class Assister {
 	float prix;
 	@DBRef
 	private Seance salle;
-	@DBRef
 	private List<Client> client;
 }
