@@ -1,7 +1,6 @@
 package org.sid.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.sid.models.Client;
 import org.sid.services.ClientService;
@@ -30,22 +29,27 @@ public class ClientController {
 	private List<Client> findAll() {
 		return this.service.findAll();
 	}
-	@GetMapping("recherche/{id}")
-	private Optional<Client> findById(@PathVariable String id){
+
+	@GetMapping("{id}")
+	private Client findById(@PathVariable String id){
 		return this.service.findById(id);
 	}
+
 	@PostMapping("")
 	public Client save(@RequestBody Client entity) {
 		return this.service.save(entity);
 	}
+
 	@PutMapping("")
 	public Client update(@RequestBody Client entity) {
 		return this.service.save(entity);
 	}
-	@DeleteMapping("delete/{id}")
+
+	@DeleteMapping("{id}")
 	public void delete(@PathVariable String id) {
 		this.service.delete(id);
 	}
+
 	@DeleteMapping("")
 	public void delete(@RequestBody Client c) {
 		this.service.delete(c.getId());

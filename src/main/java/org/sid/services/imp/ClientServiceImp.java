@@ -7,7 +7,9 @@ import org.sid.models.Client;
 import org.sid.repositories.ClientRepository;
 import org.sid.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class ClientServiceImp implements ClientService {
@@ -18,9 +20,10 @@ public class ClientServiceImp implements ClientService {
 		return this.client.findAll();
 	}
 	@Override
-	public Optional<Client> findById(String id) {
-		// TODO Auto-generated method stub
-		return this.client.findById(id);
+	public Client findById(String id) {
+		Optional<Client> optional =  this.client.findById(id);
+		if (optional.isPresent()) return optional.get();
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'id "+id+" n'est pas valide pour une client");
 	}
 	@Override
 	public Client save(Client s) {

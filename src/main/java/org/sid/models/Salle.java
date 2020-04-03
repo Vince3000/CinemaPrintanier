@@ -19,8 +19,5 @@ public class Salle {
 	private String nom;
 	private int place;
 	@DBRef
-	private Cinema cinema;
-	@DBRef
-	private Seance seances;
-
+	private Cinema cinema;	
 }

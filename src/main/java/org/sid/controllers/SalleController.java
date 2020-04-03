@@ -21,8 +21,9 @@ public class SalleController {
 	public Salle save(@RequestBody Salle entity) {
 		return this.service.save(entity);
 	}
+
 	@GetMapping("")
-	public List<Salle> findfindall(){
+	public List<Salle> findall(){
 		return this.service.findAll();
 	}
 }

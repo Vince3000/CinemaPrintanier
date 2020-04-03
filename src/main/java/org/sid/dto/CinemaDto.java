@@ -1,5 +1,6 @@
 package org.sid.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.sid.models.Cinema;
@@ -16,5 +17,5 @@ import lombok.ToString;
 @ToString
 public class CinemaDto {
 	private Cinema cinema;
-	private List<Salle> salles;	
+	private List<Salle> salles = new ArrayList<Salle>();	
 }

@@ -1,7 +1,6 @@
 package org.sid.models;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +22,4 @@ public class Film {
 	private String visa;
 	private String Comm;
 	private String note;
-	@DBRef
-	private Seance seance;
 }

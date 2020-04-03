@@ -2,7 +2,6 @@ package org.sid.controllers;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.sid.models.Seance;
 import org.sid.services.SeancesService;
@@ -27,46 +26,67 @@ import org.springframework.web.bind.annotation.RestController;
 public class SeancesController {
 	@Autowired
 	private SeancesService service;
+
 	@GetMapping("")
 	private List<Seance> findAll(){
 		return this.service.findAll();
 	}
-	@GetMapping("recherche/{id}")
-	private Optional<Seance> findById(@PathVariable String id){
+
+	@GetMapping("{id}")
+	private Seance findById(@PathVariable String id){
 		return this.service.findById(id);
 	}
-	@GetMapping("types/{type}")
+
+	@GetMapping("{type}")
 	private List<Seance> findByType(@PathVariable String type){
 		return this.service.findByType(type);
 	}
-	@GetMapping("recherche/seance/{film}")
-	private List<Seance> findByFilm(@PathVariable String film){
-		return this.service.findByFilm(film);
+
+	@GetMapping("{id}/places")
+	private int findPlaceSeance(@PathVariable String id) {
+		return this.service.findPlaceSeance(id);
 	}
-	@GetMapping("debut/{debut}/fin/{fin}")
-	private List<Seance> findByHoraire(LocalDateTime debut, LocalDateTime fin){
-		return this.service.findByHoraire(debut, fin);
+
+	@GetMapping("genre/{genre}")
+	private List<Seance> findByGenre(@PathVariable String genre){
+		return this.service.findSeanceByGenreFilm(genre);
 	}
-//	@GetMapping("genre/{genre}")
-//	private List<Seance> findByGenre(@PathVariable String genre){
-//		return this.service.findByGenre(genre);
-//	}
+
+	@GetMapping("{id}/recette")
+	private int findSeanceByRecette(@PathVariable String id) {
+		return this.service.recetteSeance (id);
+	}
+
+	@GetMapping("horaire/{min}/{max}")
+	private List<Seance> findByHoraire(@PathVariable LocalDateTime min, @PathVariable LocalDateTime max){
+		return this.service.findByHoraire(min, max);
+	}
+	
+	@GetMapping("film/{nom}")
+	private Seance seanceByFilm(@PathVariable String nom) {
+		return this.service.seanceByFilm(nom);
+	}
+
 	@PostMapping("")
 	public Seance save(@RequestBody Seance entity) {
 		return this.service.save(entity);
 	}
-	@PostMapping("ajoutclient")
-	public Seance addClient(String idseance,String idAssister) {
-		return this.service.addClient(idseance, idAssister);
+
+	@PostMapping("{idSeance}/assister/{idClient}")
+	public Seance addClient(@PathVariable String idSeance,@PathVariable String idClient) {
+		return this.service.addClient(idSeance, idClient);
 	}
+
 	@PutMapping("")
 	public Seance update(@RequestBody Seance entity) {
 		return this.service.save(entity);
 	}
-	@DeleteMapping("delete/{id}")
+
+	@DeleteMapping("{id}")
 	public void delete(@PathVariable String id) {
 		this.service.delete(id);
 	}
+
 	@DeleteMapping("")
 	public void delete(@RequestBody Seance s) {
 		this.service.delete(s.getId());
