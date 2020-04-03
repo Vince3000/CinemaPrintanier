@@ -75,7 +75,7 @@ public class SeanceServiceImp implements SeancesService {
 	}
 	@Override
 	public List<Seance> findByHoraire(LocalDateTime debut, LocalDateTime fin) {
-		return this.seance.findAllByDateBetween(debut, fin);
+		return this.seance.findByDateBetween(debut, fin);
 	}
 
 }

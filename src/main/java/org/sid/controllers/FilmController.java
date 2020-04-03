@@ -44,7 +44,7 @@ public class FilmController {
 	@PutMapping("")
 	public Film update(@RequestBody Film entity) {
 		return this.service.save(entity);
-	}
+	}	
 	@DeleteMapping("delete/{id}")
 	public void delete(@PathVariable String id) {
 		this.service.delete(id);

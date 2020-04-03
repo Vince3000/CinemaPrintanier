@@ -21,6 +21,8 @@ public class Film {
 	private int age_limite;
 	private String genre;
 	private String visa;
+	private String Comm;
+	private String note;
 	@DBRef
 	private Seance seance;
 }

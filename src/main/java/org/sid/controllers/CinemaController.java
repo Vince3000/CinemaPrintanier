@@ -48,4 +48,8 @@ public class CinemaController {
 	public void delete(@PathVariable String id) {
 		this.service.delete(id);
 	}
+	@PostMapping("{idcinema}/{idsalle}")
+	public Cinema addSalle(String idcinema, String idsalle) {
+		return this.service.addSalle(idcinema, idsalle);
+	}
 }

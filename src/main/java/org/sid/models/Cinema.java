@@ -22,5 +22,5 @@ public class Cinema {
 	private String nom;
 	private String address;
 	@DBRef
-	private Salle salle;
+	private Salle salles;
 }

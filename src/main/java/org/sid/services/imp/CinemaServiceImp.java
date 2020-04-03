@@ -5,9 +5,10 @@ import java.util.Optional;
 
 //import org.sid.dto.CinemaDto;
 import org.sid.models.Cinema;
-//import org.sid.models.Salle;
+import org.sid.models.Salle;
 import org.sid.repositories.CinemaRepository;
 import org.sid.services.CinemaService;
+import org.sid.services.SalleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Service;
 public class CinemaServiceImp implements CinemaService{
 	@Autowired
 	private CinemaRepository cine;
+	@Autowired
+	private SalleService salleservice;
 	@Override
 	public List<Cinema> findAll(){
 		return this.cine.findAll();
@@ -44,10 +47,12 @@ public class CinemaServiceImp implements CinemaService{
 		// TODO Auto-generated method stub
 		return this.cine.save(c);
 	}
-//
-//	@Override
-//	public CinemaDto save(CinemaDto dto) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override //A tester
+	public Cinema addSalle(String idcinema, String idsalle) {
+		Cinema c = this.findById(idcinema).get();
+		Optional<Salle> s = salleservice.findById(idsalle);
+		Salle salle = s.get();
+		c.setSalles(salle);
+		return c;
+	}
 }

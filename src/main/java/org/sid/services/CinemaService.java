@@ -10,5 +10,6 @@ public interface CinemaService {
 	public Optional<Cinema> findById(String id);
 	public Cinema save(Cinema s);
 	public void delete(String id);
+	public Cinema addSalle(String idcinema, String idsalle);
 	//public CinemaDto save(CinemaDto dto);
 }
