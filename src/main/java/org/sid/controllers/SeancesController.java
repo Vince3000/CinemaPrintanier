@@ -58,7 +58,7 @@ public class SeancesController {
 	}
 
 	@GetMapping("horaire/{min}/{max}")
-	private List<Seance> findByHoraire(@PathVariable LocalDateTime min, @PathVariable LocalDateTime max){
+	private List<Seance> findByHoraire(@PathVariable String min, @PathVariable String max){
 		return this.service.findByHoraire(min, max);
 	}
 	

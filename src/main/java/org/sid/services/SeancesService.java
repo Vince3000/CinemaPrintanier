@@ -1,6 +1,5 @@
 package org.sid.services;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.sid.models.Seance;
@@ -9,7 +8,7 @@ public interface SeancesService {
 	public List<Seance> findAll();
 	public Seance findById(String id);
 	public List<Seance> findByType(String type);
-	public List<Seance> findByHoraire(LocalDateTime debut, LocalDateTime fin);
+	public List<Seance> findByHoraire(String debut, String fin);
 	public Seance save(Seance s);
 	public void delete(String id);
 	public Seance update(Seance s);

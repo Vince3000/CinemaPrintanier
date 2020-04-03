@@ -27,6 +27,7 @@ public class SeanceServiceImp implements SeancesService {
 	private ClientService clientService;
 	@Autowired
 	private FilmService filmService;
+	//public static final DateTimeFormatter ISO_LOCAL_DATE_TIME;
 
 	@Override
 	public List<Seance> findAll(){
@@ -56,8 +57,12 @@ public class SeanceServiceImp implements SeancesService {
 	}
 
 	@Override
-	public List<Seance> findByHoraire(LocalDateTime debut, LocalDateTime fin) {
-		return this.seance.findByDateBetween(debut, fin);
+	public List<Seance> findByHoraire(String debut, String fin) {
+		LocalDateTime min = LocalDateTime.parse(debut);
+		LocalDateTime max = LocalDateTime.parse(fin);
+		List<Seance> seance = this.seance.findByDateBetween(min, max);
+		System.out.println(seance);
+		return seance;
 	}
 
 	@Override

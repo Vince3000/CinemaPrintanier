@@ -64,7 +64,7 @@ public class FilmServiceImp implements FilmService {
 	@Override
 	public int recetteFilm (String idFilm) {
 		Film film = this.findById(idFilm);
-		Seance seance = this.seance.findById(film.getTitre());;
+		Seance seance = this.seance.findById(film.getTitre());
 		int cumul = 0;
 		for (Assister s : seance.getClient()) {
 			cumul+= s.getPrix();
