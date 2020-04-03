@@ -19,7 +19,7 @@ public class AssisterServiceImp implements AssisterService{
 	public Assister findById(String id) {
 		Optional<Assister> optional =  this.assister.findById(id);
 		if (optional.isPresent()) return optional.get();
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'id "+id+" n'est pas valide cet assister");
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'id "+id+" n'est pas valide pour cet assister");
 	}
 
 	@Override

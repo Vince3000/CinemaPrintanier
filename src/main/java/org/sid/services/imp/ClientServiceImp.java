@@ -23,7 +23,7 @@ public class ClientServiceImp implements ClientService {
 	public Client findById(String id) {
 		Optional<Client> optional =  this.client.findById(id);
 		if (optional.isPresent()) return optional.get();
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'id "+id+" n'est pas valide pour une client");
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'id "+id+" n'existe pas");
 	}
 	@Override
 	public Client save(Client s) {

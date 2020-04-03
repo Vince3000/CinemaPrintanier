@@ -35,7 +35,6 @@ public class FilmServiceImp implements FilmService {
 
 	@Override
 	public Film findByTitre(String titre) {
-		// TODO Auto-generated method stub
 		return this.film.findByTitre(titre);
 	}
 

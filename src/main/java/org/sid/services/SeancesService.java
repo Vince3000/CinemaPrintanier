@@ -3,7 +3,6 @@ package org.sid.services;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.sid.models.Film;
 import org.sid.models.Seance;
 
 public interface SeancesService {
@@ -11,13 +10,11 @@ public interface SeancesService {
 	public Seance findById(String id);
 	public List<Seance> findByType(String type);
 	public List<Seance> findByHoraire(LocalDateTime debut, LocalDateTime fin);
-	public List<Seance> findSeanceByGenreFilm(String genre);
 	public Seance save(Seance s);
 	public void delete(String id);
 	public Seance update(Seance s);
 	public int recetteSeance (String idSeance);
 	public Seance addClient(String idSeance,String idClient);
-	public Seance findByFilm(Film titreFilm);
 	public int findPlaceSeance(String id);
 	public Seance seanceByFilm(String titre);
 }

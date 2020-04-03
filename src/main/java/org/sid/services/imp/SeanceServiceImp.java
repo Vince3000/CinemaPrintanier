@@ -2,7 +2,6 @@ package org.sid.services.imp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,18 +73,17 @@ public class SeanceServiceImp implements SeancesService {
 	@Override
 	public Seance seanceByFilm(String titre) {
 		Film film = this.filmService.findByTitre(titre);
-		return this.seance.findByFilm(film);
+		Optional<Seance> optional =  this.seance.findById(film.getId());
+		if (optional.isPresent()) return optional.get();
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Le film "+titre+" n'a pas de séance");
 	}
 
 	@Override
 	public int findPlaceSeance(String id) {
 		Seance seance = this.findById(id);
 		Salle salle = seance.getSalle();
-		List<Assister> sean = new ArrayList<>();
-		for (Assister s : seance.getClient()) {
-			sean.add(s);
-		}
-		return salle.getPlace()-sean.size();
+		List<Assister> assist = seance.getClient();
+		return salle.getPlace()-assist.size();
 	}
 
 	//@Override
@@ -118,16 +116,5 @@ public class SeanceServiceImp implements SeancesService {
 	@Override
 	public List<Seance> findByType(String type){
 		return this.seance.findAllByType(type);
-	}
-
-	@Override
-	public Seance findByFilm(Film titreFilm) {
-		return this.seance.findByFilm(titreFilm);
-	}
-
-	@Override
-	public List<Seance> findSeanceByGenreFilm(String genre) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

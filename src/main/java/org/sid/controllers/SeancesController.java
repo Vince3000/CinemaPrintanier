@@ -49,7 +49,7 @@ public class SeancesController {
 
 	@GetMapping("genre/{genre}")
 	private List<Seance> findByGenre(@PathVariable String genre){
-		return this.service.findSeanceByGenreFilm(genre);
+		return null;
 	}
 
 	@GetMapping("{id}/recette")

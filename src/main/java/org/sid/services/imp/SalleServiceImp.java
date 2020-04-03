@@ -26,6 +26,6 @@ public class SalleServiceImp implements SalleService {
 	public Salle findById(String id) {
 		Optional<Salle> optional =  this.salle.findById(id);
 		if (optional.isPresent()) return optional.get();
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'id "+id+" n'est pas valide pour cette salle");
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'id "+id+" n'est pas valide pour une salle");
 	}
 }
