@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import org.sid.models.Assister;
 import org.sid.models.Client;
-import org.sid.models.Salle;
 import org.sid.models.Seance;
 import org.sid.repositories.SeanceRepository;
 import org.sid.services.ClientService;
@@ -95,10 +94,9 @@ public class SeanceServiceImp implements SeancesService {
 	@Override
 	public int findPlaceSeance(String id) {
 		Seance seance = this.findById(id);
-		Salle salle = seance.getSalle();
 		List<Assister> assist = seance.getClient();
 		System.out.println(assist.size());
-		return salle.getPlace()-assist.size();
+		return this.findPlaceSeance(id)-assist.size();
 	}
 
 	//@Override
@@ -106,7 +104,7 @@ public class SeanceServiceImp implements SeancesService {
 		// TODO Auto-generated method stub
 		Seance seance = this.findById(idSeance);
 		Client client = this.clientService.findById(idClient);
-		if((LocalDate.now().getYear() - client.getNaissance().getYear()) >= seance.getFilm().getAgeLimite()) {
+		if((LocalDate.now().getYear() - client.getNaissance().getYear()) >= seance.getFilm().getAgeLimite() || this.findPlaceSeance(idSeance)>0) {
 		Assister assister = new Assister();
 		assister.setPrix(this.prix(seance, client));
 		assister.setClient(client);

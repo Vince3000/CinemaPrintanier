@@ -27,7 +27,6 @@ public class Seance {
 	private LocalDateTime date;
 	private String type;
 	private int duree;
-	@DBRef
 	private Salle salle;
 	//@DBRef 	//Si possibilité d'etre utiliser plusieur fois
 	private Film film;
