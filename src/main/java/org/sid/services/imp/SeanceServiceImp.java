@@ -2,14 +2,17 @@ package org.sid.services.imp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.sid.models.Assister;
 import org.sid.models.Client;
+import org.sid.models.Film;
 import org.sid.models.Seance;
 import org.sid.repositories.SeanceRepository;
 import org.sid.services.ClientService;
+import org.sid.services.FilmService;
 import org.sid.services.SeancesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +25,8 @@ public class SeanceServiceImp implements SeancesService {
 	private SeanceRepository seance;
 	@Autowired
 	private ClientService clientService;
+	@Autowired
+	private FilmService filmService;
 	//public static final DateTimeFormatter ISO_LOCAL_DATE_TIME;
 
 	@Override
@@ -63,7 +68,7 @@ public class SeanceServiceImp implements SeancesService {
 	public int recetteSeance (String idSeance) {
 		Seance seance = this.findById(idSeance);
 		int cumul = 0;
-		for (Assister s : seance.getClient()) {
+		for (Assister s : seance.getClients()) {
 			cumul+= s.getPrix();
 		}
 		return cumul;
@@ -71,32 +76,37 @@ public class SeanceServiceImp implements SeancesService {
 
 	@Override
 	public Seance seanceByFilm(String titre) {
-		Optional<Seance> optional = this.seance.findByFilmTitre(titre);
-		if (optional.isPresent()) return optional.get();
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Le film "+titre+" n'a pas de séance");
+		Film film = this.filmService.findByTitre(titre);
+		return this.seance.findByFilmId(film.getId());
 	}
 	
 	@Override
 	public List<Seance> seanceByGenre(String genre) {
-		Optional<List<Seance>> optional = this.seance.findByFilmGenre(genre);
-		if (optional.isPresent()) return optional.get();
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Le genre "+ genre +" n'a pas de séance");
+		List<Film> film = this.filmService.findFilmByGenre(genre);
+		List<Seance> seance = new ArrayList<>();
+		for (Film f : film) {
+			seance.add(this.seance.findByFilmId(f.getId()));
+		}
+		return seance;
 	}
 	
 	@Override
 	public List<Seance> seanceByAge(String age) {
 		int i = Integer.parseInt(age);
-		Optional<List<Seance>> optional = this.seance.findByFilmAgeLimite(i);
-		if (optional.isPresent()) return optional.get();
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Il n'y a pas de séance pour les moins de "+ age +" ans");
+		List<Film> film = this.filmService.findByAgeLimite(i);
+		List<Seance> seance = new ArrayList<>();
+		for (Film f : film) {
+		seance.add(this.seance.findByFilmId(f.getId()));
+		}
+		return seance;
 	}
 
 	@Override
 	public int findPlaceSeance(String id) {
 		Seance seance = this.findById(id);
-		List<Assister> assist = seance.getClient();
+		List<Assister> assist = seance.getClients();
 		System.out.println(assist.size());
-		return this.findPlaceSeance(id)-assist.size();
+		return seance.getSalle().getPlace()-assist.size();
 	}
 
 	//@Override
@@ -104,13 +114,15 @@ public class SeanceServiceImp implements SeancesService {
 		// TODO Auto-generated method stub
 		Seance seance = this.findById(idSeance);
 		Client client = this.clientService.findById(idClient);
-		if((LocalDate.now().getYear() - client.getNaissance().getYear()) >= seance.getFilm().getAgeLimite() || this.findPlaceSeance(idSeance)>0) {
-		Assister assister = new Assister();
-		assister.setPrix(this.prix(seance, client));
-		assister.setClient(client);
-		seance.getClient().add(assister);
-		return this.save(seance);
-		} throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ce film est interdit au moins de " + seance.getFilm().getAgeLimite() + " ans");
+		if((LocalDate.now().getYear() - client.getNaissance().getYear()) >= seance.getFilm().getAgeLimite()) {
+			if(this.findPlaceSeance(idSeance)>0) {
+				Assister assister = new Assister();
+				assister.setPrix(this.prix(seance, client));
+				assister.setClient(client);
+				seance.getClients().add(assister);
+				return this.save(seance);
+			} throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Plus de place pour la séance ");
+		}throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ce film est interdit au moins de " + seance.getFilm().getAgeLimite() + " ans");
 	}
 
 	private float prix (Seance ps, Client pc) {

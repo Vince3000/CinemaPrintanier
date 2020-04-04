@@ -36,36 +36,36 @@ public class SeancesController {
 		return this.service.findById(id);
 	}
 
-	@GetMapping("type/{type}")
+	@GetMapping("type/{type}")//OK
 	private List<Seance> findByType(@PathVariable String type){
 		return this.service.findByType(type);
 	}
 
-	@GetMapping("{id}/places")
+	@GetMapping("{id}/places")//OK
 	private int findPlaceSeance(@PathVariable String id) {
 		return this.service.findPlaceSeance(id);
 	}
-
-	@GetMapping("genre/{genre}")
-	private List<Seance> findByGenre(@PathVariable String genre){
-		return this.service.seanceByGenre(genre);
-	}
-
-	@GetMapping("{id}/recette")
+	
+	@GetMapping("{id}/recette")//OK
 	private int findSeanceByRecette(@PathVariable String id) {
 		return this.service.recetteSeance (id);
 	}
 
-	@GetMapping("horaire/{min}/{max}")
+	@GetMapping("horaire/{min}/{max}")//OK
 	private List<Seance> findByHoraire(@PathVariable String min, @PathVariable String max){
 		return this.service.findByHoraire(min, max);
 	}
+	
+	@GetMapping("genre/{genre}")//OK
+	private List<Seance> findByGenre(@PathVariable String genre){
+		return this.service.seanceByGenre(genre);
+	}
 
-	@GetMapping("film/{nom}")
+	@GetMapping("film/{nom}")//OK
 	private Seance seanceByFilm(@PathVariable String nom) {
 		return this.service.seanceByFilm(nom);
 	}
-	@GetMapping("age/{age}")
+	@GetMapping("age/{age}")//OK
 	private List<Seance> seanceByAge(@PathVariable String age){
 		return this.service.seanceByAge(age);
 	}

@@ -22,13 +22,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class Seance {
-	@Id
-	private String id;
-	private LocalDateTime date;
-	private String type;
-	private int duree;
-	private Salle salle;
-	//@DBRef 	//Si possibilité d'etre utiliser plusieur fois
-	private Film film;
-	private  List<Assister> Client = new ArrayList<>();
+	   @Id
+	    private String id;
+	    @DBRef
+	    private Film film;
+	    private LocalDateTime date;
+	    private List<Assister> clients = new ArrayList<>();
+	    @DBRef
+	    private Salle salle;
+	    private String type;
 }

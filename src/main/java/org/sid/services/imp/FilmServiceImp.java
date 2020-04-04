@@ -40,7 +40,9 @@ public class FilmServiceImp implements FilmService {
 
 	@Override
 	public List<Film> findFilmByGenre(String genre){
-		return this.film.findAllByGenre(genre);
+		List<Film> film = this.film.findAllByGenre(genre);
+		if (!film.isEmpty()) return film;
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'id "+genre+" n'est pas valide pour ce film");
 	}
 
 	@Override
@@ -66,7 +68,7 @@ public class FilmServiceImp implements FilmService {
 		Film film = this.findById(idFilm);
 		Seance seance = this.seance.findById(film.getId());
 		int cumul = 0;
-		for (Assister s : seance.getClient()) {
+		for (Assister s : seance.getClients()) {
 			cumul+= s.getPrix();
 		}
 		return cumul;
@@ -80,5 +82,11 @@ public class FilmServiceImp implements FilmService {
 		//			cumul+= s.getPrix();
 		//		}
 		return null;
+	}
+
+	@Override
+	public List<Film> findByAgeLimite(int age) {
+		List<Film> film = this.film.findByAgeLimite(age);
+		return film;
 	}
 }
