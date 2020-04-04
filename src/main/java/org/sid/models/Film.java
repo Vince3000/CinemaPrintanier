@@ -16,8 +16,8 @@ public class Film {
 	@Id
 	private String id;
 	private String titre;
-	private int duree_minute;
-	private int age_limite;
+	private int dureeMinute;
+	private int ageLimite;
 	private String genre;
 	private String visa;
 	private String Comm;

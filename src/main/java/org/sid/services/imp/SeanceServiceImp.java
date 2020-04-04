@@ -83,6 +83,14 @@ public class SeanceServiceImp implements SeancesService {
 		if (optional.isPresent()) return optional.get();
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Le genre "+ genre +" n'a pas de séance");
 	}
+	
+	@Override
+	public List<Seance> seanceByAge(String age) {
+		int i = Integer.parseInt(age);
+		Optional<List<Seance>> optional = this.seance.findByFilmAgeLimite(i);
+		if (optional.isPresent()) return optional.get();
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Il n'y a pas de séance pour les moins de "+ age +" ans");
+	}
 
 	@Override
 	public int findPlaceSeance(String id) {
@@ -98,11 +106,13 @@ public class SeanceServiceImp implements SeancesService {
 		// TODO Auto-generated method stub
 		Seance seance = this.findById(idSeance);
 		Client client = this.clientService.findById(idClient);
+		if((LocalDate.now().getYear() - client.getNaissance().getYear()) >= seance.getFilm().getAgeLimite()) {
 		Assister assister = new Assister();
 		assister.setPrix(this.prix(seance, client));
 		assister.setClient(client);
 		seance.getClient().add(assister);
 		return this.save(seance);
+		} throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ce film est interdit au moins de " + seance.getFilm().getAgeLimite() + " ans");
 	}
 
 	private float prix (Seance ps, Client pc) {

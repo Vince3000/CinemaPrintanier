@@ -60,10 +60,14 @@ public class SeancesController {
 	private List<Seance> findByHoraire(@PathVariable String min, @PathVariable String max){
 		return this.service.findByHoraire(min, max);
 	}
-	
+
 	@GetMapping("film/{nom}")
 	private Seance seanceByFilm(@PathVariable String nom) {
 		return this.service.seanceByFilm(nom);
+	}
+	@GetMapping("age/{age}")
+	private List<Seance> seanceByAge(@PathVariable String age){
+		return this.service.seanceByAge(age);
 	}
 
 	@PostMapping("")

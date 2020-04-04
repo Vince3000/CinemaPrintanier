@@ -13,4 +13,5 @@ public interface SeanceRepository extends MongoRepository<Seance, String> {
 	public List<Seance> findByDateBetween(LocalDateTime debut, LocalDateTime fin);
 	public Optional<Seance> findByFilmTitre(String titre);
 	public Optional<List<Seance>> findByFilmGenre(String genre);
+	public Optional<List<Seance>> findByFilmAgeLimite(int age);
 }

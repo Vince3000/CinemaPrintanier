@@ -17,4 +17,5 @@ public interface SeancesService {
 	public int findPlaceSeance(String id);
 	public Seance seanceByFilm(String titre);
 	public List<Seance> seanceByGenre(String genre);
+	public List<Seance> seanceByAge(String age);
 }
