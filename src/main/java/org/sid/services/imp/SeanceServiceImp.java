@@ -7,12 +7,10 @@ import java.util.Optional;
 
 import org.sid.models.Assister;
 import org.sid.models.Client;
-import org.sid.models.Film;
 import org.sid.models.Salle;
 import org.sid.models.Seance;
 import org.sid.repositories.SeanceRepository;
 import org.sid.services.ClientService;
-import org.sid.services.FilmService;
 import org.sid.services.SeancesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,8 +23,6 @@ public class SeanceServiceImp implements SeancesService {
 	private SeanceRepository seance;
 	@Autowired
 	private ClientService clientService;
-	@Autowired
-	private FilmService filmService;
 	//public static final DateTimeFormatter ISO_LOCAL_DATE_TIME;
 
 	@Override
@@ -61,7 +57,6 @@ public class SeanceServiceImp implements SeancesService {
 		LocalDateTime min = LocalDateTime.parse(debut);
 		LocalDateTime max = LocalDateTime.parse(fin);
 		List<Seance> seance = this.seance.findByDateBetween(min, max);
-		System.out.println(seance);
 		return seance;
 	}
 
@@ -77,10 +72,16 @@ public class SeanceServiceImp implements SeancesService {
 
 	@Override
 	public Seance seanceByFilm(String titre) {
-		Film film = this.filmService.findByTitre(titre);
-		Optional<Seance> optional =  this.seance.findById(film.getId());
+		Optional<Seance> optional = this.seance.findByFilmTitre(titre);
 		if (optional.isPresent()) return optional.get();
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Le film "+titre+" n'a pas de séance");
+	}
+	
+	@Override
+	public List<Seance> seanceByGenre(String genre) {
+		Optional<List<Seance>> optional = this.seance.findByFilmGenre(genre);
+		if (optional.isPresent()) return optional.get();
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Le genre "+ genre +" n'a pas de séance");
 	}
 
 	@Override
@@ -88,6 +89,7 @@ public class SeanceServiceImp implements SeancesService {
 		Seance seance = this.findById(id);
 		Salle salle = seance.getSalle();
 		List<Assister> assist = seance.getClient();
+		System.out.println(assist.size());
 		return salle.getPlace()-assist.size();
 	}
 
@@ -117,7 +119,6 @@ public class SeanceServiceImp implements SeancesService {
 		return result;
 	}
 
-	/*---------------------------------------EXPERIMENTALE---------------------------------------------*/
 	@Override
 	public List<Seance> findByType(String type){
 		return this.seance.findAllByType(type);

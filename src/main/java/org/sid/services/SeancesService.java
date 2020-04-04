@@ -16,4 +16,5 @@ public interface SeancesService {
 	public Seance addClient(String idSeance,String idClient);
 	public int findPlaceSeance(String id);
 	public Seance seanceByFilm(String titre);
+	public List<Seance> seanceByGenre(String genre);
 }

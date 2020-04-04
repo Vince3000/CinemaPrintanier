@@ -36,7 +36,7 @@ public class SeancesController {
 		return this.service.findById(id);
 	}
 
-	@GetMapping("{type}")
+	@GetMapping("type/{type}")
 	private List<Seance> findByType(@PathVariable String type){
 		return this.service.findByType(type);
 	}
@@ -48,7 +48,7 @@ public class SeancesController {
 
 	@GetMapping("genre/{genre}")
 	private List<Seance> findByGenre(@PathVariable String genre){
-		return null;
+		return this.service.seanceByGenre(genre);
 	}
 
 	@GetMapping("{id}/recette")
