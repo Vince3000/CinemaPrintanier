@@ -20,6 +20,4 @@ public class Film {
 	private int ageLimite;
 	private String genre;
 	private String visa;
-	private String Comm;
-	private String note;
 }

@@ -19,5 +19,5 @@ public class Cinema {
 	@Id
 	private String id;
 	private String nom;
-	private String address;
+	private String adresse;
 }

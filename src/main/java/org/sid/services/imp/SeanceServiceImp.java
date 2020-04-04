@@ -27,7 +27,6 @@ public class SeanceServiceImp implements SeancesService {
 	private ClientService clientService;
 	@Autowired
 	private FilmService filmService;
-	//public static final DateTimeFormatter ISO_LOCAL_DATE_TIME;
 
 	@Override
 	public List<Seance> findAll(){
@@ -79,7 +78,13 @@ public class SeanceServiceImp implements SeancesService {
 		Film film = this.filmService.findByTitre(titre);
 		return this.seance.findByFilmId(film.getId());
 	}
-	
+
+	@Override
+	public Seance seanceByFilmId(String id) {
+		Film film = this.filmService.findById(id);
+		return this.seance.findByFilmId(film.getId());
+	}
+
 	@Override
 	public List<Seance> seanceByGenre(String genre) {
 		List<Film> film = this.filmService.findFilmByGenre(genre);
@@ -89,14 +94,14 @@ public class SeanceServiceImp implements SeancesService {
 		}
 		return seance;
 	}
-	
+
 	@Override
 	public List<Seance> seanceByAge(String age) {
 		int i = Integer.parseInt(age);
 		List<Film> film = this.filmService.findByAgeLimite(i);
 		List<Seance> seance = new ArrayList<>();
 		for (Film f : film) {
-		seance.add(this.seance.findByFilmId(f.getId()));
+			seance.add(this.seance.findByFilmId(f.getId()));
 		}
 		return seance;
 	}

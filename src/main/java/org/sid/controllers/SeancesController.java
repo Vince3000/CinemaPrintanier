@@ -45,7 +45,7 @@ public class SeancesController {
 	private int findPlaceSeance(@PathVariable String id) {
 		return this.service.findPlaceSeance(id);
 	}
-	
+
 	@GetMapping("{id}/recette")//OK
 	private int findSeanceByRecette(@PathVariable String id) {
 		return this.service.recetteSeance (id);
@@ -55,7 +55,7 @@ public class SeancesController {
 	private List<Seance> findByHoraire(@PathVariable String min, @PathVariable String max){
 		return this.service.findByHoraire(min, max);
 	}
-	
+
 	@GetMapping("genre/{genre}")//OK
 	private List<Seance> findByGenre(@PathVariable String genre){
 		return this.service.seanceByGenre(genre);

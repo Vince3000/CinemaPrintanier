@@ -18,4 +18,5 @@ public interface SeancesService {
 	public Seance seanceByFilm(String titre);
 	public List<Seance> seanceByGenre(String genre);
 	public List<Seance> seanceByAge(String age);
+	public Seance seanceByFilmId(String id);
 }

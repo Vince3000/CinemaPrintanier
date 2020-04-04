@@ -34,7 +34,7 @@ public class FilmController {
 		return this.service.findById(id);
 	}
 
-	@GetMapping("film/{titre}")
+	@GetMapping("film/{titre}")//OK
 	private Film findByTitre(@PathVariable String titre){
 		return this.service.findByTitre(titre);
 	}

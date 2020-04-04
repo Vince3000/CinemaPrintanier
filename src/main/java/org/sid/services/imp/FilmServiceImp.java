@@ -62,26 +62,16 @@ public class FilmServiceImp implements FilmService {
 		if (!film.isEmpty()) return null;
 		return null;
 	}
-	
+
 	@Override
 	public int recetteFilm (String idFilm) {
 		Film film = this.findById(idFilm);
-		Seance seance = this.seance.findById(film.getId());
+		Seance seance = this.seance.seanceByFilmId(film.getId());
 		int cumul = 0;
 		for (Assister s : seance.getClients()) {
 			cumul+= s.getPrix();
 		}
 		return cumul;
-	}
-
-	@Override
-	public List<Film> getByRecette(String id) {
-		//		Seance seance = this.findById(idSeance);
-		//		int cumul = 0;
-		//		for (Assister s : seance.getClient()) {
-		//			cumul+= s.getPrix();
-		//		}
-		return null;
 	}
 
 	@Override

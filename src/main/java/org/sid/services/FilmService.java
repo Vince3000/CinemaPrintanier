@@ -10,7 +10,6 @@ public interface FilmService {
 	public Film findByTitre(String titre);
 	public Film save(Film s);
 	public void delete(String id);
-	public List<Film> getByRecette(String id);
 	public List<Film> findFilmByGenre(String genre);
 	public int recetteFilm(String idFilm);
 	public List<Film> findByAgeLimite(int age);

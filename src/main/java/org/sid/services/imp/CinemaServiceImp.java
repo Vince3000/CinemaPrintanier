@@ -16,7 +16,6 @@ public class CinemaServiceImp implements CinemaService{
 	@Autowired
 	private CinemaRepository cine;
 	//@Autowired
-	//private SalleService salleservice;
 
 	@Override
 	public List<Cinema> findAll(){
@@ -31,7 +30,7 @@ public class CinemaServiceImp implements CinemaService{
 	}
 
 	@Override
-	public Cinema save(Cinema s) {
+	public Cinema saveCinema(Cinema s) {
 		return this.cine.save(s);
 	}
 
@@ -39,19 +38,4 @@ public class CinemaServiceImp implements CinemaService{
 	public void delete(String id) {
 		this.cine.deleteById(id);
 	}
-
-	@Override
-	public Cinema addSalle(String idcinema, String idsalle) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	//	@Override //A tester
-	//	public Cinema addSalle(String idcinema, String idsalle) {
-	//		Cinema c = this.findById(idcinema).get();
-	//		Optional<Salle> s = salleservice.findById(idsalle);
-	//		Salle salle = s.get();
-	//		c.setSalles(salle);
-	//		return c;
-	//	}
 }
