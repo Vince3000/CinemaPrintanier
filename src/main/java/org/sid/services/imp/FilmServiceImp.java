@@ -1,5 +1,6 @@
 package org.sid.services.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,15 @@ public class FilmServiceImp implements FilmService {
 	@Override
 	public Film findByTitre(String titre) {
 		return this.film.findByTitre(titre);
+	}
+
+	@Override
+	public List<Film> findBykeyWord(String titre) {
+		List<Film> film = new ArrayList<>();
+		for (Film f : this.film.findAll()) {
+			if(f.getTitre().contains(titre)) film.add(f);
+		}
+		return film;
 	}
 
 	@Override

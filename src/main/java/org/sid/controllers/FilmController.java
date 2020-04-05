@@ -35,13 +35,13 @@ public class FilmController {
 	}
 
 	@GetMapping("film/{titre}")//OK
-	private Film findByTitre(@PathVariable String titre){
-		return this.service.findByTitre(titre);
+	private List<Film> findByTitre(@PathVariable String titre){
+		return this.service.findBykeyWord(titre);
 	}
 
 	@GetMapping("{id}/recette")
-	private int findSeanceByRecette(@PathVariable String id) {
-		return this.service.recetteFilm(id);
+	private String findSeanceByRecette(@PathVariable String id) {
+		return "Ce film a rapporté "+this.service.recetteFilm(id)+"€";
 	}
 
 	@PostMapping("")

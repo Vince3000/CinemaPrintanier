@@ -13,4 +13,5 @@ public interface FilmService {
 	public List<Film> findFilmByGenre(String genre);
 	public int recetteFilm(String idFilm);
 	public List<Film> findByAgeLimite(int age);
+	public List<Film> findBykeyWord(String titre);
 }

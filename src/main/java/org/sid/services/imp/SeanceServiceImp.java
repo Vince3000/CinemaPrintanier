@@ -2,6 +2,7 @@ package org.sid.services.imp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -57,8 +58,8 @@ public class SeanceServiceImp implements SeancesService {
 
 	@Override
 	public List<Seance> findByHoraire(String debut, String fin) {
-		LocalDateTime min = LocalDateTime.parse(debut);
-		LocalDateTime max = LocalDateTime.parse(fin);
+		LocalDateTime min = LocalDateTime.of(LocalDate.now(),LocalTime.parse(debut));
+		LocalDateTime max = LocalDateTime.of(LocalDate.now(),LocalTime.parse(fin));
 		List<Seance> seance = this.seance.findByDateBetween(min, max);
 		return seance;
 	}
@@ -98,10 +99,10 @@ public class SeanceServiceImp implements SeancesService {
 	@Override
 	public List<Seance> seanceByAge(String age) {
 		int i = Integer.parseInt(age);
-		List<Film> film = this.filmService.findByAgeLimite(i);
+		List<Film> film = this.filmService.findAll();
 		List<Seance> seance = new ArrayList<>();
 		for (Film f : film) {
-			seance.add(this.seance.findByFilmId(f.getId()));
+			if(f.getAgeLimite()<=i) seance.add(this.seance.findByFilmId(f.getId()));
 		}
 		return seance;
 	}
@@ -110,12 +111,11 @@ public class SeanceServiceImp implements SeancesService {
 	public int findPlaceSeance(String id) {
 		Seance seance = this.findById(id);
 		List<Assister> assist = seance.getClients();
-		System.out.println(assist.size());
 		return seance.getSalle().getPlace()-assist.size();
 	}
 
 	//@Override
-	public Seance addClient(String idSeance, String idClient) {
+	public List<String> addClient(String idSeance, String idClient) {
 		// TODO Auto-generated method stub
 		Seance seance = this.findById(idSeance);
 		Client client = this.clientService.findById(idClient);
@@ -125,15 +125,29 @@ public class SeanceServiceImp implements SeancesService {
 				assister.setPrix(this.prix(seance, client));
 				assister.setClient(client);
 				seance.getClients().add(assister);
-				return this.save(seance);
+				this.save(seance);
+				return recap(idSeance,idClient);
 			} throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Plus de place pour la séance ");
 		}throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ce film est interdit au moins de " + seance.getFilm().getAgeLimite() + " ans");
 	}
 
+	//@Override
+	public List<String> recap(String idSeance, String idClient){
+		Seance seance = this.findById(idSeance);
+		Client client = this.clientService.findById(idClient);
+		String titre = seance.getFilm().getTitre();
+		String salle = seance.getSalle().getNom();
+		List<String> s = new ArrayList<>();
+		s.add("Titre : " + titre);
+		s.add("Salle :" + salle);
+		s.add("Le " + seance.getDate().getDayOfMonth() +"/" + seance.getDate().getMonthValue()+"/"+seance.getDate().getYear() + 
+				" à " + seance.getDate().getHour() + ":" + seance.getDate().getMinute());
+		s.add("Prix : "+this.prix(seance, client)+"€");
+		return s;
+	}
+
 	private float prix (Seance ps, Client pc) {
 		float result = 10; //prix par default
-		System.out.println(ps.getType());
-
 		if(ps.getType().equals("3D")) result+=3.0f;
 		else if(ps.getType().equals("IMAX")) result+=6.0f;
 		else if(ps.getType().equals("4DX")) result+=8.0f;

@@ -42,13 +42,16 @@ public class SeancesController {
 	}
 
 	@GetMapping("{id}/places")//OK
-	private int findPlaceSeance(@PathVariable String id) {
-		return this.service.findPlaceSeance(id);
+	private String findPlaceSeance(@PathVariable String id) {
+		int p = this.service.findPlaceSeance(id);
+		String s=null;
+		if (p>1) s= "s";
+		return "Pour cette séance, il reste " + this.service.findPlaceSeance(id) + " place" + s;
 	}
 
 	@GetMapping("{id}/recette")//OK
-	private int findSeanceByRecette(@PathVariable String id) {
-		return this.service.recetteSeance (id);
+	private String findSeanceByRecette(@PathVariable String id) {
+		return "Cette séance à rapporté " + this.service.recetteSeance (id) + "€";
 	}
 
 	@GetMapping("horaire/{min}/{max}")//OK
@@ -76,22 +79,23 @@ public class SeancesController {
 	}
 
 	@PostMapping("{idSeance}/assister/{idClient}")
-	public Seance addClient(@PathVariable String idSeance,@PathVariable String idClient) {
+	public List<String>  addClient(@PathVariable String idSeance,@PathVariable String idClient) {
 		return this.service.addClient(idSeance, idClient);
+		
 	}
 
-	@PutMapping("")
-	public Seance update(@RequestBody Seance entity) {
-		return this.service.save(entity);
-	}
+@PutMapping("")
+public Seance update(@RequestBody Seance entity) {
+	return this.service.save(entity);
+}
 
-	@DeleteMapping("{id}")
-	public void delete(@PathVariable String id) {
-		this.service.delete(id);
-	}
+@DeleteMapping("{id}")
+public void delete(@PathVariable String id) {
+	this.service.delete(id);
+}
 
-	@DeleteMapping("")
-	public void delete(@RequestBody Seance s) {
-		this.service.delete(s.getId());
-	}
+@DeleteMapping("")
+public void delete(@RequestBody Seance s) {
+	this.service.delete(s.getId());
+}
 }

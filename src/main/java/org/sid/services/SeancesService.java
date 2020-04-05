@@ -13,10 +13,11 @@ public interface SeancesService {
 	public void delete(String id);
 	public Seance update(Seance s);
 	public int recetteSeance (String idSeance);
-	public Seance addClient(String idSeance,String idClient);
+	public List<String> addClient(String idSeance,String idClient);
 	public int findPlaceSeance(String id);
 	public Seance seanceByFilm(String titre);
 	public List<Seance> seanceByGenre(String genre);
 	public List<Seance> seanceByAge(String age);
 	public Seance seanceByFilmId(String id);
+	//public List<String> recap(String idSeance, String idClient);
 }
